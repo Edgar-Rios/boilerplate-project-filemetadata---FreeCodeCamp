@@ -11,6 +11,21 @@ app.get('/', function (req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
 
+// MI CODIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+const fileManager = require('./middlewares/uploadFileManager');
+
+app.post('/api/fileanalyse', fileManager.single('upfile'), (req, res, next) => {
+    const {originalname, mimetype, size} = req.file;
+
+    // console.log(req.files);
+    return res.json({
+      name: originalname,
+      type: mimetype,
+      size,
+    });
+})
+
+// MI CODIGO ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
